@@ -1,19 +1,26 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
+<<<<<<< HEAD
 import QtQuick.Controls 1.3
+=======
+>>>>>>> 2b8b8aa3146927f100bcd10887b518a317cad453
 
 Window {
     visible: true
 
     MouseArea {
+<<<<<<< HEAD
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
         anchors.topMargin: 0
+=======
+>>>>>>> 2b8b8aa3146927f100bcd10887b518a317cad453
         anchors.fill: parent
         onClicked: {
             Qt.quit();
         }
+<<<<<<< HEAD
 
         ListView {
             id: listView1
@@ -87,6 +94,13 @@ Window {
             text: qsTr("Search")
             font.pixelSize: 12
         }
+=======
+    }
+
+    Text {
+        text: qsTr("Hello World")
+        anchors.centerIn: parent
+>>>>>>> 2b8b8aa3146927f100bcd10887b518a317cad453
     }
 }
 
