@@ -24,36 +24,57 @@ Window {
         JSONListModel {
                 id: jsonModel1
                 source: "https://api.twitch.tv/kraken/streams/featured"
-                // All books in the store object
                 query: "$.featured[*]"
             }
 
         SplitView {
+            id: splitView1
+            width: 200
+            height: 300
             anchors.fill: parent
 
         ListView {
             id: lista
-            width: 250
-            height: 300
+            anchors.bottom: parent.bottom
+            anchors.bottomMargin: 1
+            anchors.top: parent.top
+            anchors.topMargin: 1
             contentHeight: 379
-            spacing: 30
+            spacing: 50
             flickableDirection: Flickable.AutoFlickDirection
             contentWidth: 0
             model: jsonModel1.model
 
-                delegate: Rectangle {
+            delegate: Rectangle {
                     Text {
+                        anchors.left: parent.left
+                        anchors.leftMargin: 55
                         text: model.stream.channel.name
                     }
-                }
+                    Text {
+                        styleColor: "#06d6f0"
+                        font.italic: true
+                        font.pixelSize: 9
+                        anchors.top: parent.top
+                        anchors.left: parent.left
+                        anchors.leftMargin: 55
+                        anchors.topMargin: 20
+                        text: model.stream.viewers
+                    }
+                    Image {
+                        width: 50
+                        height: 50
+                        source: model.stream.channel.logo
+                        MouseArea {
+                                anchors.fill: parent
+                                onClicked: {
+                                   console.info("image clicked!")
+                                }
+                            }
+                    }
+            }
         }
-        Image {
-            sourceSize.width: -1
-            fillMode: Image.PreserveAspectFit
-            source: "http://static-cdn.jtvnw.net/jtv_user_pictures/nightblue3-profile_image-be8a5ea2b11d7f12-300x300.png"
-        }
+
         }
     }
 }
-
-
