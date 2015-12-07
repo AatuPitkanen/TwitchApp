@@ -1,106 +1,59 @@
 import QtQuick 2.3
 import QtQuick.Window 2.2
-<<<<<<< HEAD
 import QtQuick.Controls 1.3
-=======
->>>>>>> 2b8b8aa3146927f100bcd10887b518a317cad453
+
 
 Window {
     visible: true
-
+    width: 500
+    height: 700
+    minimumWidth: lista.implicitWidth
     MouseArea {
-<<<<<<< HEAD
+
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
         anchors.topMargin: 0
-=======
->>>>>>> 2b8b8aa3146927f100bcd10887b518a317cad453
+
         anchors.fill: parent
         onClicked: {
             Qt.quit();
         }
-<<<<<<< HEAD
+
+
+        JSONListModel {
+                id: jsonModel1
+                source: "https://api.twitch.tv/kraken/streams/featured"
+                // All books in the store object
+                query: "$.featured[*]"
+            }
+
+        SplitView {
+            anchors.fill: parent
 
         ListView {
-            id: listView1
-            x: 15
-            y: 82
-            width: 110
-            height: 160
-            model: ListModel {
-                ListElement {
-                    name: "Grey"
-                    colorCode: "grey"
-                }
+            id: lista
+            width: 250
+            height: 300
+            contentHeight: 379
+            spacing: 30
+            flickableDirection: Flickable.AutoFlickDirection
+            contentWidth: 0
+            model: jsonModel1.model
 
-                ListElement {
-                    name: "Red"
-                    colorCode: "red"
-                }
-
-                ListElement {
-                    name: "Blue"
-                    colorCode: "blue"
-                }
-
-                ListElement {
-                    name: "Green"
-                    colorCode: "green"
-                }
-            }
-            delegate: Item {
-                x: 5
-                width: 80
-                height: 40
-                Row {
-                    id: row1
-                    Rectangle {
-                        width: 40
-                        height: 40
-                        color: colorCode
-                    }
-
+                delegate: Rectangle {
                     Text {
-                        text: name
-                        font.bold: true
-                        anchors.verticalCenter: parent.verticalCenter
+                        text: model.stream.channel.name
                     }
-                    spacing: 10
                 }
-            }
         }
-
-        Button {
-            id: button1
-            x: 27
-            y: 342
-            text: qsTr("Joku")
+        Image {
+            sourceSize.width: -1
+            fillMode: Image.PreserveAspectFit
+            source: "http://static-cdn.jtvnw.net/jtv_user_pictures/nightblue3-profile_image-be8a5ea2b11d7f12-300x300.png"
         }
-
-        Button {
-            id: button2
-            x: 8
-            y: 17
-            text: qsTr("Search")
         }
-
-        TextEdit {
-            id: textEdit1
-            x: 99
-            y: 21
-            width: 80
-            height: 20
-            text: qsTr("Search")
-            font.pixelSize: 12
-        }
-=======
-    }
-
-    Text {
-        text: qsTr("Hello World")
-        anchors.centerIn: parent
->>>>>>> 2b8b8aa3146927f100bcd10887b518a317cad453
     }
 }
+
 

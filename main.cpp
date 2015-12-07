@@ -58,7 +58,7 @@ void sendRequest(){
                 propertyKeys.append(obj["key"].toString());
             }
 
-            qDebug() << "Time:" << jsonObj["user"].toString();
+           // qDebug() << "Time:" << jsonObj["user"].toString();
             qDebug() << "Streams:" << jsonResponse;
 
             delete reply;
