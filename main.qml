@@ -5,16 +5,19 @@ import QtQuick.Controls 1.3
 
 Window {
     visible: true
-    width: 500
-    height: 700
-    minimumWidth: lista.implicitWidth
+    width: 400
+    height: 600
+
+    color: "#c2cfcf"
+    minimumWidth: 200
+    minimumHeight: 325
     MouseArea {
+        id: mouseArea1
 
         anchors.rightMargin: 0
         anchors.bottomMargin: 0
         anchors.leftMargin: 0
         anchors.topMargin: 0
-
         anchors.fill: parent
         onClicked: {
             Qt.quit();
@@ -27,29 +30,41 @@ Window {
                 query: "$.featured[*]"
             }
 
-        SplitView {
-            id: splitView1
-            width: 200
-            height: 300
-            anchors.fill: parent
-
         ListView {
             id: lista
+            width: 307
+            clip: true
+            anchors.right: parent.right
+            anchors.rightMargin: 40
+            anchors.left: parent.left
+            anchors.leftMargin: 40
             anchors.bottom: parent.bottom
-            anchors.bottomMargin: 1
+            anchors.bottomMargin: 40
             anchors.top: parent.top
-            anchors.topMargin: 1
-            contentHeight: 379
-            spacing: 50
+            anchors.topMargin: 40
+            contentHeight: 365
+            contentWidth:  200
+            spacing: 51
             flickableDirection: Flickable.AutoFlickDirection
-            contentWidth: 0
             model: jsonModel1.model
 
             delegate: Rectangle {
                     Text {
                         anchors.left: parent.left
                         anchors.leftMargin: 55
+                        text: model.stream.channel.status
+                        wrapMode: Text.WordWrap
+                    }
+                    Text {
+                        styleColor: "#06d6f0"
+                        font.italic: true
+                        font.pixelSize: 11
+                        anchors.top: parent.top
+                        anchors.left: parent.left
+                        anchors.leftMargin: 55
+                        anchors.topMargin: 15
                         text: model.stream.channel.name
+                        wrapMode: Text.WordWrap
                     }
                     Text {
                         styleColor: "#06d6f0"
@@ -58,8 +73,8 @@ Window {
                         anchors.top: parent.top
                         anchors.left: parent.left
                         anchors.leftMargin: 55
-                        anchors.topMargin: 20
-                        text: model.stream.viewers
+                        anchors.topMargin: 30
+                        text:"Viewers: " + model.stream.viewers
                     }
                     Image {
                         width: 50
@@ -68,13 +83,24 @@ Window {
                         MouseArea {
                                 anchors.fill: parent
                                 onClicked: {
-                                   console.info("image clicked!")
+                                          app.playvideo()
+
                                 }
-                            }
+                        }
                     }
             }
         }
 
+        TextField {
+            anchors.leftMargin: 1
+            id: searchfield
+            x: 40
+            y: 9
+            width: 120
+            anchors.bottom: lista.top
+            anchors.bottomMargin: 6
+            placeholderText: qsTr("")
+        }
+
         }
     }
-}
