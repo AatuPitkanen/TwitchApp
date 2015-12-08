@@ -18,8 +18,6 @@ int main(int argc, char *argv[])
     QGuiApplication app(argc, argv);
     QQmlApplicationEngine engine;
     PlayStream myClass;
-    QDeclarativeContext *context = myClass.rootContext();
-    context->setContextProperty("PlayStream", &myClass);
     engine.load(QUrl(QStringLiteral("qrc:/main.qml")));
 
     return app.exec();
